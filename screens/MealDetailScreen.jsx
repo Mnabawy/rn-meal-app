@@ -1,6 +1,6 @@
 import React from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
-import { Categories } from "../data/dummy-data"
+import { CATEGORIES } from "../data/dummy-data"
 
 const MealDetailScreen = props => {
   const item = props.navigation.getParam("item", {})
@@ -19,7 +19,7 @@ const MealDetailScreen = props => {
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
   const catId = navigation.getParam("catId")
-  const category = Categories.find(cat => cat.id === catId)
+  const category = CATEGORIES.find(cat => cat.id === catId)
   return {
     headerTitle: category.title,
   }

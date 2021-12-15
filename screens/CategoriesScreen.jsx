@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import { Categories } from "../data/dummy-data"
+import { CATEGORIES } from "../data/dummy-data"
 import CategoryItem from "../components/CategoryItem"
 
 const CategoriesScreen = props => {
@@ -25,7 +25,7 @@ const CategoriesScreen = props => {
     <View style={styles.screen}>
       <FlatList
         keyExtractor={(item, key) => item.id}
-        data={Categories}
+        data={CATEGORIES}
         renderItem={listItem}
         numColumns={2}
         horizontal={false}
