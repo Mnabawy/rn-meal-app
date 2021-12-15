@@ -1,16 +1,19 @@
 import React from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
-import { CATEGORIES } from "../data/dummy-data"
+import { CATEGORIES, MEALS } from "../data/dummy-data"
 
-const MealDetailScreen = props => {
-  const item = props.navigation.getParam("item", {})
+const MealDetailScreen = ({ navigation }) => {
+  const mealId = navigation.getParam("mealId", {})
+
+  selectedMeal = MEALS.find(meal => meal.id === mealId)
+
   return (
     <View>
-      <Text>{item.title}</Text>
+      <Text>{selectedMeal.title}</Text>
       <Button
         title="Go To Categories"
         onPress={() => {
-          props.navigation.popToTop()
+          navigation.popToTop()
         }}
       />
     </View>
@@ -18,10 +21,9 @@ const MealDetailScreen = props => {
 }
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
-  const catId = navigation.getParam("catId")
-  const category = CATEGORIES.find(cat => cat.id === catId)
+  const title = navigation.getParam("title")
   return {
-    headerTitle: category.title,
+    headerTitle: title,
   }
 }
 

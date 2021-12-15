@@ -16,13 +16,26 @@ const CategoryMealScreen = props => {
 
   const renderMealItem = itemData => {
     return (
-      <MealItem title={itemData.item.title} navigation={props.navigation}   />
+      <MealItem
+        title={itemData.item.title}
+        navigation={props.navigation}
+        duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        imageUri={itemData.item.imageUrl}
+        onSelected={() =>
+          props.navigation.navigate("MealDetail", {
+            mealId: itemData.item.id,
+            title: itemData.item.title,
+          })
+        }
+      />
     )
   }
 
   return (
     <View style={styles.screen}>
-      <FlatList data={MEALS} renderItem={renderMealItem} />
+      <FlatList data={displayedMeals} renderItem={renderMealItem} />
     </View>
   )
 }
@@ -36,6 +49,6 @@ CategoryMealScreen.navigationOptions = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  screen: {},
+  screen: { margin: 15 },
 })
 export default CategoryMealScreen
