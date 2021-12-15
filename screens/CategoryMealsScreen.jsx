@@ -1,9 +1,10 @@
 import React from "react"
-import { Button, StyleSheet, Text, View } from "react-native"
+import { Button, Platform, StyleSheet, Text, View } from "react-native"
 
 import { Categories } from "../data/dummy-data"
+import Colors from '../constants/Colors'
 
-const CategoryMealsScreen = props => {
+const CategoryMealScreen = props => {
   const categoryId = props.navigation.getParam("categoryId")
 
   const category = Categories.find(cat => cat.id === categoryId)
@@ -25,9 +26,13 @@ const CategoryMealsScreen = props => {
   )
 }
 
-CategoryMealsScreen.navigationOptions = {
-  headerTitle: "Category Meals Screen",
+CategoryMealScreen.navigationOptions = ({ navigation }) => {
+  const categoryId = navigation.getParam("categoryId")
+  const title = Categories.find(cat => cat.id === categoryId).title
+  return {
+    headerTitle: title,
+  }
 }
 
 const styles = StyleSheet.create({})
-export default CategoryMealsScreen
+export default CategoryMealScreen
