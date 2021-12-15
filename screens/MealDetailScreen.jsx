@@ -24,6 +24,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
   const title = navigation.getParam("title")
   return {
     headerTitle: title,
+    headerRight: <Text>FAV </Text>
   }
 }
 
