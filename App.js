@@ -1,12 +1,10 @@
-import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import MealsNavigator from "./Navigation/MealsNavigator"
-import { useScreens } from "react-native-screens"
 import * as Font from "expo-font"
+import { OverflowMenuProvider } from "react-navigation-header-buttons"
 
-useScreens()
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sens": require("./assets/fonts/OpenSans-Regular.ttf"),
