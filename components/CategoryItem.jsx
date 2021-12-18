@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-
+import styles from "./Styles/CategoryItemStyle"
 const CategoryItem = props => {
   const { id, color, title, navigation } = props
 
@@ -25,12 +25,7 @@ const CategoryItem = props => {
       }}
     >
       <TouchableComponent
-        style={{
-          height: "100%",
-          width: "100%",
-          borderColor: "black",
-          borderWidth: 1,
-        }}
+        style={styles.touchablContainer}
         onPress={() => {
           navigation.navigate({
             routeName: "CategoryMeals",
@@ -55,30 +50,3 @@ const CategoryItem = props => {
 }
 
 export default CategoryItem
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    height: 150,
-    width: 150,
-    margin: 15,
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowRadius: 0.26,
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
-    padding: 15,
-  },
-  item: {
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    flex: 1,
-    paddingBottom: 10,
-    paddingRight: 10,
-  },
-  title: {
-    fontFamily: "open-sans-bold",
-    fontSize: 18,
-    textAlign: "right",
-  },
-})

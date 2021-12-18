@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, View, FlatList } from "react-native"
 import _ from "lodash"
 import { CATEGORIES, MEALS } from "../data/dummy-data"
 import MealItem from "../components/MealItem"
+import MealList from "../components/MealList"
 
 const CategoryMealScreen = props => {
   const categoryId = props.navigation.getParam("categoryId")
@@ -14,30 +15,14 @@ const CategoryMealScreen = props => {
     meal => meal.categoryIds.indexOf(categoryId) >= 0
   )
 
-  const renderMealItem = itemData => {
-    return (
-      <MealItem
-        title={itemData.item.title}
-        navigation={props.navigation}
-        duration={itemData.item.duration}
-        complexity={itemData.item.complexity}
-        affordability={itemData.item.affordability}
-        imageUri={itemData.item.imageUrl}
-        onSelected={() =>
-          props.navigation.navigate("MealDetail", {
-            mealId: itemData.item.id,
-            title: itemData.item.title,
-          })
-        }
-      />
-    )
+  const onSelectHandler = props => {
+    props.navigation.navigate("MealDetail", {
+      mealId: itemData.item.id,
+      title: itemData.item.title,
+    })
   }
 
-  return (
-    <View style={styles.screen}>
-      <FlatList data={displayedMeals} renderItem={renderMealItem} />
-    </View>
-  )
+  return <MealList listData={displayedMeals} navigation={props.navigation} />
 }
 
 CategoryMealScreen.navigationOptions = ({ navigation }) => {
@@ -48,7 +33,4 @@ CategoryMealScreen.navigationOptions = ({ navigation }) => {
   }
 }
 
-const styles = StyleSheet.create({
-  screen: { margin: 15 },
-})
 export default CategoryMealScreen
