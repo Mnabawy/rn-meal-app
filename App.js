@@ -1,13 +1,13 @@
 import React, { useState } from "react"
+import "react-native-reanimated"
 import { StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import MealsNavigator from "./Navigation/MealsNavigator"
 import * as Font from "expo-font"
-import { OverflowMenuProvider } from "react-navigation-header-buttons"
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    "open-sens": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   })
 }

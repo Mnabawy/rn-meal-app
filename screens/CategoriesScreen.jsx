@@ -1,14 +1,9 @@
 import React from "react"
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Platform,
-  TouchableNativeFeedback,
-} from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { StyleSheet, FlatList, View } from "react-native"
 import { CATEGORIES } from "../data/dummy-data"
 import CategoryItem from "../components/CategoryItem"
+import { HeaderButtons, Item } from "react-navigation-header-buttons"
+import CustomHeaderButton from "../components/CustomHeaderButton"
 
 const CategoriesScreen = props => {
   const listItem = category => {
@@ -32,6 +27,20 @@ const CategoriesScreen = props => {
       />
     </View>
   )
+}
+
+CategoriesScreen.navigationOptions = navData => {
+  return {
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="menu"
+          iconName="menu"
+          onPress={() => navData.navigation.toggleDrawer()}
+        />
+      </HeaderButtons>
+    ),
+  }
 }
 
 const styles = StyleSheet.create({

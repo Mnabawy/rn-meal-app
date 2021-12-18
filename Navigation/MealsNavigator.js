@@ -9,7 +9,9 @@ import CategoriesScreen from "../screens/CategoriesScreen"
 import CategoryMealsScreen from "../screens/CategoryMealsScreen"
 import MealDetailScreen from "../screens/MealDetailScreen"
 import FavoritesScreen from "../screens/FavoritesScreen"
+import FilterScreen from "../screens/FilterScreen"
 import Colors from "../constants/Colors"
+import { createDrawerNavigator } from "react-navigation-drawer"
 
 const defaultNavStackOptions = {
   headerStyle: {
@@ -81,4 +83,33 @@ const MealsFavTabNavigator =
         },
       })
 
-export default createAppContainer(MealsFavTabNavigator)
+const FilterStackNavigator = createStackNavigator(
+  {
+    Filter: FilterScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavStackOptions,
+  }
+)
+
+const MainNavigator = createDrawerNavigator(
+  {
+    MealsFav: {
+      screen: MealsFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals",
+      },
+    },
+    Filter: { screen: FilterStackNavigator },
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.accent,
+      labelStyle: {
+        fontFamily: "open-sans-bold",
+      },
+    },
+  }
+)
+
+export default createAppContainer(MainNavigator)
