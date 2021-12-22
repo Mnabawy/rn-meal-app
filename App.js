@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import MealsNavigator from "./Navigation/MealsNavigator"
 import * as Font from "expo-font"
-import { MealsContext } from "./store/app-context"
 
 const fetchFonts = () => {
   return Font.loadAsync({
