@@ -1,15 +1,18 @@
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View, Image } from "react-native"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
+import { useSelector } from "react-redux"
 
 import CustomHeaderButton from "../components/CustomHeaderButton"
 import DefaultText from "../components/DefaultText"
-import { MEALS } from "../data/dummy-data"
+
 import CustomList from "../components/List"
 
 const MealDetailScreen = props => {
   const { navigation } = props
   const mealId = navigation.getParam("mealId", {})
+
+  const MEALS = useSelector(state => state.meals.meals)
 
   const selectedMeal = MEALS.find(meal => meal.id === mealId)
 
@@ -31,7 +34,6 @@ const MealDetailScreen = props => {
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
   const title = navigation.getParam("title")
-  const mealId = navigation.getParam("mealId")
 
   return {
     headerTitle: title,
@@ -41,11 +43,11 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
           iconName="ios-star"
           title="Favorite"
           onPress={() => {
-            // find the meal
-            const meal = MEALS.find(meal => meal.id === mealId)
-            // find the index of the meal in the list
-            const meals = [...MEALS]
-            const mealIndex = MEALS.findIndex(meal => meal.id === mealId)
+            // // find the meal
+            // const meal = MEALS.find(meal => meal.id === mealId)
+            // // find the index of the meal in the list
+            // const meals = [...MEALS]
+            // const mealIndex = MEALS.findIndex(meal => meal.id === mealId)
           }}
         />
       </HeaderButtons>
