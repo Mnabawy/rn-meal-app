@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native"
 import styles from "./Styles/MealItemStyle"
-
+import DefaultText from "../components/DefaultText"
 const MealItem = props => {
   const { title, duration, complexity, affordability, imageUri, onSelected } =
     props
@@ -25,9 +25,9 @@ const MealItem = props => {
             </ImageBackground>
           </View>
           <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-            <Text>{duration}m</Text>
-            <Text>{complexity}</Text>
-            <Text>{affordability}</Text>
+            <DefaultText>{duration}m</DefaultText>
+            <DefaultText>{complexity}</DefaultText>
+            <DefaultText>{affordability}</DefaultText>
           </View>
         </View>
       </TouchableOpacity>

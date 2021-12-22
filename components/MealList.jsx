@@ -30,5 +30,3 @@ const MealList = props => {
 }
 
 export default MealList
-
-const styles = StyleSheet.create({})

@@ -1,8 +1,5 @@
 import React from "react"
-import { Button, StyleSheet, Text, View, FlatList } from "react-native"
-import _ from "lodash"
 import { CATEGORIES, MEALS } from "../data/dummy-data"
-import MealItem from "../components/MealItem"
 import MealList from "../components/MealList"
 
 const CategoryMealScreen = props => {

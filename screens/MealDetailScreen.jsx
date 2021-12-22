@@ -1,29 +1,38 @@
-import React from "react"
-import { Button, StyleSheet, Text, View } from "react-native"
+import React, { useState } from "react"
+import { ScrollView, StyleSheet, Text, View, Image } from "react-native"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
-import CustomHeaderButton from "../components/CustomHeaderButton"
-import { MEALS } from "../data/dummy-data"
 
-const MealDetailScreen = ({ navigation }) => {
+import CustomHeaderButton from "../components/CustomHeaderButton"
+import DefaultText from "../components/DefaultText"
+import { MEALS } from "../data/dummy-data"
+import CustomList from "../components/List"
+
+const MealDetailScreen = props => {
+  const { navigation } = props
   const mealId = navigation.getParam("mealId", {})
 
-  selectedMeal = MEALS.find(meal => meal.id === mealId)
+  const selectedMeal = MEALS.find(meal => meal.id === mealId)
 
   return (
-    <View style={styles.screen}>
-      <Text>{selectedMeal.title}</Text>
-      <Button
-        title="Go To Categories"
-        onPress={() => {
-          navigation.popToTop()
-        }}
-      />
-    </View>
+    <ScrollView>
+      <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+      <View style={styles.details}>
+        <DefaultText>{selectedMeal.duration}m</DefaultText>
+        <DefaultText>{selectedMeal.complexity}</DefaultText>
+        <DefaultText>{selectedMeal.affordability}</DefaultText>
+      </View>
+      <Text style={styles.title}>Ingrediants</Text>
+      <CustomList data={selectedMeal.ingredients} />
+      <Text style={styles.title}>Steps</Text>
+      <CustomList data={selectedMeal.steps} />
+    </ScrollView>
   )
 }
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
   const title = navigation.getParam("title")
+  const mealId = navigation.getParam("mealId")
+
   return {
     headerTitle: title,
     headerRight: () => (
@@ -31,7 +40,13 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
         <Item
           iconName="ios-star"
           title="Favorite"
-          onPress={() => console.log("clicked")}
+          onPress={() => {
+            // find the meal
+            const meal = MEALS.find(meal => meal.id === mealId)
+            // find the index of the meal in the list
+            const meals = [...MEALS]
+            const mealIndex = MEALS.findIndex(meal => meal.id === mealId)
+          }}
         />
       </HeaderButtons>
     ),
@@ -41,12 +56,18 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 export default MealDetailScreen
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  image: {
+    width: "100%",
+    height: 200,
   },
-  star: {
-    paddingRight: 10,
+  details: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 15,
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    textAlign: "center",
+    fontSize: 20,
   },
 })
