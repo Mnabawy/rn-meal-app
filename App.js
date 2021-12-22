@@ -4,6 +4,9 @@ import { StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import MealsNavigator from "./Navigation/MealsNavigator"
 import * as Font from "expo-font"
+import { combineReducers, createStore } from "redux"
+import { MealsReducer } from "./store/reducers/meals-reducer"
+import { Provider } from "react-redux"
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -11,6 +14,12 @@ const fetchFonts = () => {
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   })
 }
+
+const rootReducer = combineReducers({
+  meals: MealsReducer,
+})
+
+const store = createStore(rootReducer)
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false)
@@ -24,7 +33,11 @@ export default function App() {
     )
   }
 
-  return <MealsNavigator />
+  return (
+    <Provider store={store}>
+      <MealsNavigator />
+    </Provider>
+  )
 }
 
 const styles = StyleSheet.create({
