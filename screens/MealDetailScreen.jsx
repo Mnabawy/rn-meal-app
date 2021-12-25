@@ -1,20 +1,30 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, View, Image } from "react-native"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import CustomHeaderButton from "../components/CustomHeaderButton"
 import DefaultText from "../components/DefaultText"
-
 import CustomList from "../components/List"
+import { toggleFavorite } from "../store/actions/meals-actions"
 
-const MealDetailScreen = props => {
-  const { navigation } = props
+const MealDetailScreen = ({ navigation }) => {
+  const MEALS = useSelector(state => state.meals.meals)
   const mealId = navigation.getParam("mealId", {})
 
-  const MEALS = useSelector(state => state.meals.meals)
-
   const selectedMeal = MEALS.find(meal => meal.id === mealId)
+
+  const dispatch = useDispatch()
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId))
+  }, [dispatch, mealId])
+
+  useEffect(() => {
+    navigation.setParams({
+      toggleFav: toggleFavoriteHandler,
+    })
+  }, [toggleFavoriteHandler])
 
   return (
     <ScrollView>
@@ -34,6 +44,7 @@ const MealDetailScreen = props => {
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
   const title = navigation.getParam("title")
+  const toggleFavoriteHandler = navigation.getParam("toggleFav")
 
   return {
     headerTitle: title,
@@ -42,13 +53,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
         <Item
           iconName="ios-star"
           title="Favorite"
-          onPress={() => {
-            // // find the meal
-            // const meal = MEALS.find(meal => meal.id === mealId)
-            // // find the index of the meal in the list
-            // const meals = [...MEALS]
-            // const mealIndex = MEALS.findIndex(meal => meal.id === mealId)
-          }}
+          onPress={toggleFavoriteHandler}
         />
       </HeaderButtons>
     ),

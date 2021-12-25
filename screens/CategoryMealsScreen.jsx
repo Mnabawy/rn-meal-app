@@ -1,23 +1,19 @@
 import React from "react"
+import { useSelector } from "react-redux"
+
 import { CATEGORIES } from "../data/dummy-data"
 import MealList from "../components/MealList"
-import { useSelector } from "react-redux"
 
 const CategoryMealScreen = props => {
   const categoryId = props.navigation.getParam("categoryId")
 
-  const availableMeals = useSelector(state => state.meals.filterdMeals)
+  const availableMeals = useSelector(state => state.meals.filteredMeals)
 
   const displayedMeals = availableMeals.filter(
     meal => meal.categoryIds.indexOf(categoryId) >= 0
   )
 
-  const onSelectHandler = props => {
-    props.navigation.navigate("MealDetail", {
-      mealId: itemData.item.id,
-      title: itemData.item.title,
-    })
-  }
+  console.log(displayedMeals)
 
   return <MealList listData={displayedMeals} navigation={props.navigation} />
 }

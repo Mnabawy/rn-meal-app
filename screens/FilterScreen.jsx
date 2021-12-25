@@ -20,7 +20,6 @@ const FilterScreen = props => {
       vegan: isVegan,
       vegetarian: isVegetarian,
     }
-    console.log(appliedFilters)
   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
 
   useEffect(() => {

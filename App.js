@@ -2,11 +2,13 @@ import React, { useState } from "react"
 import "react-native-reanimated"
 import { StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
-import MealsNavigator from "./Navigation/MealsNavigator"
 import * as Font from "expo-font"
+import { Provider } from "react-redux"
+
+import MealsNavigator from "./Navigation/MealsNavigator"
 import { combineReducers, createStore } from "redux"
 import { MealsReducer } from "./store/reducers/meals-reducer"
-import { Provider } from "react-redux"
+import { CategoriesReducer } from "./store/reducers/categories-reducer"
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -17,6 +19,7 @@ const fetchFonts = () => {
 
 const rootReducer = combineReducers({
   meals: MealsReducer,
+  categories: CategoriesReducer,
 })
 
 const store = createStore(rootReducer)

@@ -1,11 +1,14 @@
 import React from "react"
 import { StyleSheet, FlatList, View } from "react-native"
-import { CATEGORIES } from "../data/dummy-data"
-import CategoryItem from "../components/CategoryItem"
 import { HeaderButtons, Item } from "react-navigation-header-buttons"
+import { useSelector } from "react-redux"
+
+import CategoryItem from "../components/CategoryItem"
 import CustomHeaderButton from "../components/CustomHeaderButton"
 
 const CategoriesScreen = props => {
+  const CATEGORIES = useSelector(state => state.categories.categories)
+
   const listItem = category => {
     return (
       <CategoryItem
@@ -16,6 +19,7 @@ const CategoriesScreen = props => {
       />
     )
   }
+
   return (
     <View style={styles.screen}>
       <FlatList
