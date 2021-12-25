@@ -14,8 +14,8 @@ export const MealsReducer = (state = initialState, action) => {
         meal => meal.id === action.mealId
       )
       if (existedMeal >= 0) {
-        let updatedFevMeals = [...state.favoriteMeals]
-        updatedFevMeals.filter(meal => meal.id !== action.mealId)
+        let list = [...state.favoriteMeals]
+        const updatedFevMeals = list.filter(meal => meal.id !== action.mealId)
         return {
           ...state,
           favoriteMeals: updatedFevMeals,
